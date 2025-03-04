@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-// Define the structure of the expected response if it is a JSON object
+// temp object
 interface RouteResponse {
   routes: Array<{
     legs: Array<{
@@ -19,7 +19,7 @@ export default function RouteForm() {
   const [departureTime, setDepartureTime] = useState("");
   const [mode, setMode] = useState("driving");
   const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<RouteResponse | null>(null); // Updated to handle JSON response
+  const [data, setData] = useState<RouteResponse | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -46,7 +46,7 @@ export default function RouteForm() {
         },
       });
       console.log("api response", response);
-      setData(response?.data?.googleResponse || null); // Assuming the response contains googleResponse JSON
+      setData(response?.data?.googleResponse || null);
     } catch (error) {
       console.error("Error fetching route prediction:", error);
       setError("Failed to fetch route prediction.");

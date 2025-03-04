@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/database";
 import axios from "axios";
-import { MongoClient } from "mongodb";
 
 
 export async function POST(req: Request) {
@@ -9,6 +8,7 @@ export async function POST(req: Request) {
     const { origin, destination, waypoints, departure_time, mode } = await req.json();
     const key = process.env.GOOGLE_MAPS_API_KEY;
 
+    // Request to Google API
     // const googleApiUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&waypoints=${waypoints}&departure_time=${departure_time}&mode=${mode}&key=${key}`;
     // console.log("google url", googleApiUrl)
     // try {
@@ -18,9 +18,7 @@ export async function POST(req: Request) {
     //   console.log("error", err);
     // }
 
-    const uri = "mongodb://admin:secret@mongodb:27017/traffic_prediction_db?authSource=admin";
-  const client = new MongoClient(uri);
-
+  // For Testing
     const googleResponse = {
       "geocoded_waypoints" : 
       [
@@ -1026,6 +1024,7 @@ export async function POST(req: Request) {
     const randomTime = new Date(Date.now() + Math.floor(Math.random() * 1000000000));
 
 
+    // This section to add request to DB
     // let newRequest = {}
     // try {
     //   newRequest = await prisma.routeRequest.create({
