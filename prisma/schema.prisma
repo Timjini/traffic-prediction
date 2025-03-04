@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = env("DATABASE_PROVIDER")
+  url      = env("DATABASE_URL")
+}
+
+model RouteRequest {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  origin        String
+  destination   String
+  waypoints     String[]
+  departureTime DateTime
+  mode          String
+  prediction    String
+  createdAt     DateTime @default(now())
+}
