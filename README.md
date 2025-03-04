@@ -1,37 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Traffic Prediction App
 
-## Getting Started
+This project is a web application built using the **Next.js** framework that integrates with the **Google Maps API** to provide traffic predictions. The application takes in origin, destination, waypoints, departure time, and mode of transport to calculate the best route and estimated time based on real-time traffic data.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Route Prediction**: Get predicted traffic conditions and estimated travel time based on real-time data from Google Maps.
+- **Integration with Google Maps API**: Utilizes Google Maps Distance Matrix API to calculate distance and duration between multiple locations.
+- **Supports Multiple Transport Modes**: Users can choose from different transport modes including driving, walking, bicycling, and transit.
+- **Real-time Traffic Data**: Provides updated predictions based on traffic conditions and departure time.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# traffic-prediction
+- **Next.js**: A React-based framework for building the frontend and API routes.
+- **Google Maps API**: To fetch traffic data, including route information, distance, and duration.
+- **TypeScript**: For type safety and better development experience.
+- **Axios**: For making HTTP requests to external APIs.
+- **Prisma**: For database integration and management (optional based on use).
+- **Docker**: For containerized development and deployment.
