@@ -1,0 +1,12 @@
+## install Prisma 
+npm install prisma @prisma/client
+npx prisma init
+### ==> prisma allow to use ORM easily
+
+###genrate for mongodb
+npx prisma generate
+
+### for PSQL => npx prisma migrate dev --name init
+
+### migration 
+npx prisma migrate dev                  
