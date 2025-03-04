@@ -18,24 +18,8 @@ export async function POST(req: Request) {
     //   console.log("error", err);
     // }
 
-    const uri = "mongodb://timjini:150150@mongodb:27017/traffic_prediction_db?authSource=admin";
+    const uri = "mongodb://admin:secret@mongodb:27017/traffic_prediction_db?authSource=admin";
   const client = new MongoClient(uri);
-
-  try {
-    await client.connect();
-    console.log("Connected successfully to MongoDB");
-  } catch (error) {
-    console.error("Failed to connect to MongoDB:", error);
-  } finally {
-    await client.close();
-  }
-
-    try {
-      const result = await prisma.request.findMany();
-      console.log("----------->",result);
-    } catch (error) {
-      console.error("Error connecting to the database:", error);
-    }
 
     const googleResponse = {
       "geocoded_waypoints" : 
@@ -1042,24 +1026,24 @@ export async function POST(req: Request) {
     const randomTime = new Date(Date.now() + Math.floor(Math.random() * 1000000000));
 
 
-    let newRequest = {}
-    try {
-      newRequest = await prisma.routeRequest.create({
-        data: {
-          origin,
-          destination,
-          departureTime: randomTime,
-          mode,
-          prediction,
-        },
-      });
+    // let newRequest = {}
+    // try {
+    //   newRequest = await prisma.routeRequest.create({
+    //     data: {
+    //       origin,
+    //       destination,
+    //       departureTime: randomTime,
+    //       mode,
+    //       prediction,
+    //     },
+    //   });
 
-      console.log("new Request", newRequest);
-    } catch (err) {
-      console.log("data not saved",err)
-    }
+    //   console.log("new Request", newRequest);
+    // } catch (err) {
+    //   console.log("data not saved",err)
+    // }
 
-    return NextResponse.json({ success: true , data: newRequest});
+    return NextResponse.json({ success: true ,googleResponse});
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json(

@@ -2,6 +2,16 @@
 import { useState } from "react";
 import axios from "axios";
 
+// Define the structure of the expected response if it is a JSON object
+interface RouteResponse {
+  routes: Array<{
+    legs: Array<{
+      distance: { text: string };
+      duration: { text: string };
+    }>;
+  }>;
+}
+
 export default function RouteForm() {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
@@ -9,6 +19,7 @@ export default function RouteForm() {
   const [departureTime, setDepartureTime] = useState("");
   const [mode, setMode] = useState("driving");
   const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<RouteResponse | null>(null); // Updated to handle JSON response
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -18,7 +29,7 @@ export default function RouteForm() {
       return;
     }
 
-    setError(null); 
+    setError(null);
 
     const queryParams = {
       origin,
@@ -28,15 +39,14 @@ export default function RouteForm() {
       mode,
     };
 
-    console.log("query params", queryParams);
-
     try {
       const response = await axios.post('/api/route', queryParams, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response);
+      console.log("api response", response);
+      setData(response?.data?.googleResponse || null); // Assuming the response contains googleResponse JSON
     } catch (error) {
       console.error("Error fetching route prediction:", error);
       setError("Failed to fetch route prediction.");
@@ -99,6 +109,30 @@ export default function RouteForm() {
         {error && <p className="text-red-500">{error}</p>}
         <button type="submit">Get Route Prediction</button>
       </form>
+
+      {/* Render the response data */}
+      {data ? (
+        <div>
+          <h3>Routes Information:</h3>
+          <ul>
+            {data.routes.map((route, index) => (
+              <li key={index}>
+                <h4>Route {index + 1}</h4>
+                <div>
+                  {route.legs.map((leg, legIndex) => (
+                    <div key={legIndex}>
+                      <p>Distance: {leg.distance.text}</p>
+                      <p>Duration: {leg.duration.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p>No data available.</p>
+      )}
     </div>
   );
 }
